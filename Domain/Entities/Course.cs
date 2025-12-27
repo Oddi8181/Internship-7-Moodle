@@ -24,5 +24,11 @@
             Enrollments = new List<Enrollment>();
 
         }
+
+        public void AddStudent(User student)
+        {
+            var enrollment = new Enrollment(student, this);
+            Enrollments.Add(enrollment);
+        }
     }
 }

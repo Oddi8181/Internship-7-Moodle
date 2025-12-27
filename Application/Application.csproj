@@ -12,7 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Authentication\Register\" />
     <Folder Include="Courses\" />
     <Folder Include="Chat\" />
     <Folder Include="Admin\" />
