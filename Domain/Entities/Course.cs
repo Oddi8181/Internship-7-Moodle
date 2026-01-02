@@ -30,5 +30,20 @@
             var enrollment = new Enrollment(student, this);
             Enrollments.Add(enrollment);
         }
+        public void AddMaterial(string name, string url)
+        {
+            var material = new StudyMaterial(name, url, this);
+            StudyMaterials.Add(material);
+        }
+        public void AddNotification(string title, string content)
+        {
+            var notification = new Notification(title, content, this);
+            Notifications.Add(notification);
+        }
+
+        public void AddAnnouncement(string title, string content)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

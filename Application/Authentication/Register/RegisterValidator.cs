@@ -53,6 +53,16 @@ namespace Application.Authentication.Register
                     Code = "INVALID_CAPTCHA"
                 });
             }
+            if (!IsValidEmail(command.Email))
+            {
+                result.AddValidationItem(new ValidationItem
+                {
+                    ValidationSeverity = ValidationSeverity.Error,
+                    Message = "Invalid email format.",
+                    Code = "INVALID_EMAIL_FORMAT"
+                });
+
+            }
             return result;
         }
         private static bool IsValidEmail(string email)

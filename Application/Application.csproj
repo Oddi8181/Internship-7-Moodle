@@ -12,9 +12,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Courses\" />
     <Folder Include="Chat\" />
     <Folder Include="Admin\" />
+    <Folder Include="Courses\GetMyCourses\" />
+    <Folder Include="Courses\PublishAnnouncement\" />
   </ItemGroup>
 
 </Project>

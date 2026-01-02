@@ -3,7 +3,7 @@
     public enum Role
     {
         Student,
-        Professor,
+        Proffesor,
         Admin
     }
 }
