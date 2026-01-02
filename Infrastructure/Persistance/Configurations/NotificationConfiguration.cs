@@ -1,12 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Domain.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Infrastructure.Persistance.Configurations
+public class NotificationConfiguration : IEntityTypeConfiguration<Notification>
 {
-    internal class NotificationConfiguration
+    public void Configure(EntityTypeBuilder<Notification> builder)
     {
+        builder.ToTable("announcements");
+
+        builder.HasKey(x => x.Id);
+
+        builder.Property(x => x.Title)
+            .IsRequired();
+
+        builder.Property(x => x.Content)
+            .IsRequired();
+
+        builder.Property(x => x.CourseId)
+            .IsRequired();
     }
 }

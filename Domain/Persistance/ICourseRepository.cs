@@ -6,7 +6,7 @@ namespace Domain.Persistance
     {
         Task<IEnumerable<Course>> GetAllCoursesAsync();
         Task<Course?> GetByIdAsync(Guid courseId);
-        Task<IEnumerable<Course>> GetCoursesByProffesorIdAsync(Guid userId);
+        Task<IEnumerable<Course>> GetCoursesByProfessorIdAsync(Guid userId);
         Task<IEnumerable<Course>> GetCoursesByStudentIdAsync(Guid userId);
         Task UpdateAsync(Course course);
     }
