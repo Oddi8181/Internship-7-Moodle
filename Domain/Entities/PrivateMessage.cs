@@ -13,7 +13,7 @@
         public string Content { get; set; }
         public DateTime SentAt { get; set; }
 
-        private PrivateMessage() { }
+        public PrivateMessage() { }
         public PrivateMessage(User sender, User receiver, string content)
         {
             Id = Guid.NewGuid();

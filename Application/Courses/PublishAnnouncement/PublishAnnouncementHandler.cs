@@ -24,7 +24,7 @@ namespace Application.Courses.PublishAnnouncement
             if (course.ProffesorId != command.ProffesorId)
                 return Forbidden();
 
-            course.AddMaterial(command.Title, command.Content);
+            course.AddNotification(command.Title, command.Content);
 
             await _courseRepository.UpdateAsync(course);
 

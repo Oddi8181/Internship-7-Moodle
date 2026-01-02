@@ -9,6 +9,7 @@
 
         public Guid CourseId { get; private set; }
         public Course Course { get; private set; }
+        public DateTime CreatedAt { get; internal set; }
 
         private Enrollment()
         {

@@ -28,22 +28,22 @@
         public void AddStudent(User student)
         {
             var enrollment = new Enrollment(student, this);
+            enrollment.CreatedAt = DateTime.UtcNow;
             Enrollments.Add(enrollment);
         }
         public void AddMaterial(string name, string url)
         {
             var material = new StudyMaterial(name, url, this);
+            material.CreatedAt = DateTime.UtcNow;
             StudyMaterials.Add(material);
         }
         public void AddNotification(string title, string content)
         {
             var notification = new Notification(title, content, this);
+            notification.CreatedAt = DateTime.UtcNow;
             Notifications.Add(notification);
         }
 
-        public void AddAnnouncement(string title, string content)
-        {
-            throw new NotImplementedException();
-        }
+
     }
 }

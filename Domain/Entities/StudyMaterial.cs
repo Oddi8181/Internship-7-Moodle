@@ -5,7 +5,7 @@
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string Url { get; set; }
-        public DateTime createdAt { get; private set; }
+        public DateTime CreatedAt { get; set; }
         public Guid CourseId { get; set; }
         public Course Course { get; set; }
 
