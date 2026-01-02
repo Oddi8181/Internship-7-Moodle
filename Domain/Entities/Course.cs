@@ -4,8 +4,8 @@
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public Guid ProffesorId { get; set; }
-        public User Proffesor { get; private set; }
+        public Guid ProfessorId { get; set; }
+        public User Professor { get; private set; }
 
         public ICollection<StudyMaterial> StudyMaterials { get; private set; }
         public ICollection<Notification> Notifications { get; private set; }
@@ -13,11 +13,11 @@
 
 
         private Course() { }
-        public Course(string name, User proffesor)
+        public Course(string name, User professor)
         {
             Name = name;
-            Proffesor = proffesor;
-            ProffesorId = proffesor.Id;
+            Professor = professor;
+            ProfessorId = professor.Id;
 
             StudyMaterials = new List<StudyMaterial>();
             Notifications = new List<Notification>();

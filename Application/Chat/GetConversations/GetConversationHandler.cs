@@ -35,7 +35,22 @@ namespace Application.Chat.GetConversations
                 .ToList();
 
             var result = new List<GetConversationDto>();
-            // ... (rest of your logic)
+            
+            foreach (var c in conversations)
+            {
+                var user = await _userRepository.GetByIdAsync(c.OtherUserId);
+                if (user == null) continue;
+
+                result.Add(new GetConversationDto
+                {
+                    UserId = user.Id,
+                    Email = user.Email,
+                    LastMessageAt = c.LastMessage.SentAt,
+                    LastMessagePreview = c.LastMessage.Content.Length > 30
+                        ? c.LastMessage.Content.Substring(0, 30) + "..."
+                        : c.LastMessage.Content
+                });
+            }
         }
     }
 }

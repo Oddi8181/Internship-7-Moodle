@@ -33,5 +33,9 @@ namespace Domain.Entities
             Role = newRole;
         }
 
+        public void UpdateEmail(string newEmail)
+        {
+            Email = newEmail;
+        }
     }
 }
