@@ -2,19 +2,26 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-public class EnrollmentConfiguration : IEntityTypeConfiguration<Enrollment>
+namespace Infrastructure.Persistence.Configurations
 {
-    public void Configure(EntityTypeBuilder<Enrollment> builder)
+    public class EnrollmentConfiguration : IEntityTypeConfiguration<Enrollment>
     {
-        builder.ToTable("enrollments");
+        public void Configure(EntityTypeBuilder<Enrollment> builder)
+        {
+            builder.ToTable("enrollments");
 
-        builder.HasKey(x => new { x.UserId, x.CourseId });
+            builder.HasKey(e => e.Id);
 
-        builder.Property(x => x.UserId)
-            .IsRequired();
+            builder.HasIndex(e => new { e.UserId, e.CourseId })
+                .IsUnique();
 
-        builder.Property(x => x.CourseId)
-            .IsRequired();
+            builder.HasOne(e => e.Student)
+                .WithMany(u => u.Enrollments)
+                .HasForeignKey(e => e.UserId);
+
+            builder.HasOne(e => e.Course)
+                .WithMany(c => c.Enrollments)
+                .HasForeignKey(e => e.CourseId);
+        }
     }
 }
-

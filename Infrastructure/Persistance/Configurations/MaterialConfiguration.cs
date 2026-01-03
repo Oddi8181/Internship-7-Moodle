@@ -18,5 +18,9 @@ public class MaterialConfiguration : IEntityTypeConfiguration<StudyMaterial>
 
         builder.Property(x => x.CourseId)
             .IsRequired();
+
+        builder.HasOne(sm => sm.Course)
+            .WithMany(c => c.StudyMaterials)
+            .HasForeignKey(sm => sm.CourseId);
     }
 }

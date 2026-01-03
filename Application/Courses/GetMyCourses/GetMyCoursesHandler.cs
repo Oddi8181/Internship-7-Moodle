@@ -18,7 +18,7 @@ namespace Application.Courses.GetMyCourses
             IEnumerable<Course> courses;
             if (command.Role == Role.Proffesor)
             {
-                courses = await _courseRepository.GetCoursesByProffesorIdAsync(command.UserId);
+                courses = await _courseRepository.GetCoursesByProfessorIdAsync(command.UserId);
             }
             else if (command.Role == Role.Student)
             {

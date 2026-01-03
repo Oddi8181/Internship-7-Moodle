@@ -1,5 +1,4 @@
-﻿using Application.Authentication.Login;
-using Application.Common.Model;
+﻿using Application.Common.Model;
 using Application.Common.Validation;
 using Domain.Entities;
 using Domain.Persistance;

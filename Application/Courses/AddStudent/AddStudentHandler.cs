@@ -10,6 +10,12 @@ namespace Application.Courses.AddStudent
         private readonly ICourseRepository _courseRepository;
         private readonly IUserRepository _userRepository;
         private readonly AddStudentValidator _validator;
+        public AddStudentHandler(ICourseRepository course, IUserRepository user, AddStudentValidator validator)
+        {
+            _courseRepository = course;
+            _userRepository = user;
+            _validator = validator;
+        }
         public async Task<Result<bool>>  HandleAsync(AddStudentCommand command)
         {
             var validation = _validator.Validate(command);

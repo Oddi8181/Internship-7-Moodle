@@ -12,10 +12,10 @@ namespace Domain.Entities
         public string PasswordHash { get; set; }
         public Role Role { get; set; } 
 
-        public ICollection<Enrollment> Enrolments { get; private set; }
+        public ICollection<Enrollment> Enrollments { get; private set; }
         public ICollection<Course> Courses { get; private set; }
         public ICollection<PrivateMessage> SentMessages { get; private set; }
-        public ICollection<PrivateMessage> RecievedMessages { get; private set; }
+        public ICollection<PrivateMessage> ReceivedMessages { get; private set; }
         private User()
         {
             
@@ -26,7 +26,7 @@ namespace Domain.Entities
             Email = email;
             PasswordHash = passwordHash;
             Role = Role.Student;
-            Enrolments = new List<Enrollment>();
+            Enrollments = new List<Enrollment>();
         }
         public void ChangeRole(Role newRole)
         {

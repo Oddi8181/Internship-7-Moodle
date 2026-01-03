@@ -23,7 +23,9 @@ namespace Application.Authentication.Login
             }
             var user = await _userRepository.GetByEmailAsync(loginCommand.Email);
 
-            if (user == null || !PasswordHasher.Verify(loginCommand.Password, user.PasswordHash))
+            if (user == null || !Application.Common.Validation.PasswordHasher.Verify(
+        loginCommand.Password,
+        user.PasswordHash))
                 return InvalidCredentials();
 
             return Result<User>.Success(user);

@@ -21,5 +21,10 @@ public class PrivateMessageConfiguration : IEntityTypeConfiguration<PrivateMessa
 
         builder.Property(x => x.ReceiverId)
             .IsRequired();
+
+        builder.HasOne(m => m.Receiver)
+            .WithMany(u => u.ReceivedMessages)
+            .HasForeignKey(m => m.ReceiverId)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }

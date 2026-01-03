@@ -51,6 +51,8 @@ namespace Application.Chat.GetConversations
                         : c.LastMessage.Content
                 });
             }
+
+            return Result<IEnumerable<GetConversationDto>>.Success(result);
         }
     }
 }

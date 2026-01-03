@@ -18,7 +18,7 @@
             Id = Guid.NewGuid();
             Name = name;
             Url = url;
-            createdAt = DateTime.UtcNow;
+            CreatedAt = DateTime.UtcNow;
             Course = course;
             CourseId = course.Id;
         }

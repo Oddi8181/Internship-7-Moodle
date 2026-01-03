@@ -18,5 +18,10 @@ public class NotificationConfiguration : IEntityTypeConfiguration<Notification>
 
         builder.Property(x => x.CourseId)
             .IsRequired();
+
+
+        builder.HasOne(n => n.Course)
+            .WithMany(c => c.Notifications)
+            .HasForeignKey(n => n.CourseId);
     }
 }

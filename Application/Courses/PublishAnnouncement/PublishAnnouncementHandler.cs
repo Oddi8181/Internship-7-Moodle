@@ -21,7 +21,7 @@ namespace Application.Courses.PublishAnnouncement
             var course = await _courseRepository.GetByIdAsync(command.CourseId);
             if (course is null)
                 return NotFound("COURSE_NOT_FOUND", "Course not found");
-            if (course.ProffesorId != command.ProffesorId)
+            if (course.ProfessorId != command.ProffesorId)
                 return Forbidden();
 
             course.AddNotification(command.Title, command.Content);

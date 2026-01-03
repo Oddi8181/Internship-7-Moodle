@@ -2,33 +2,39 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-public class CourseConfiguration : IEntityTypeConfiguration<Course>
+namespace Infrastructure.Persistence.Configurations
 {
-    public void Configure(EntityTypeBuilder<Course> builder)
+    public class CourseConfiguration : IEntityTypeConfiguration<Course>
     {
-        builder.ToTable("courses");
+        public void Configure(EntityTypeBuilder<Course> builder)
+        {
+            builder.ToTable("courses");
 
-        builder.HasKey(x => x.Id);
+            builder.HasKey(c => c.Id);
 
-        builder.Property(x => x.Name)
-            .IsRequired();
+            builder.Property(c => c.Name)
+                .IsRequired()
+                .HasMaxLength(200);
 
-        builder.Property(x => x.ProfessorId)
-            .IsRequired();
+            
+            builder.HasOne(c => c.Professor)
+                .WithMany(u => u.Courses)
+                .HasForeignKey(c => c.ProfessorId);
 
-        builder.HasMany(x => x.Enrollments)
-            .WithOne()
-            .HasForeignKey(x => x.CourseId)
-            .OnDelete(DeleteBehavior.Cascade);
+           
+            builder.HasMany(c => c.Enrollments)
+                .WithOne(e => e.Course)
+                .HasForeignKey(e => e.CourseId);
 
-        builder.HasMany(x => x.Notifications)
-            .WithOne()
-            .HasForeignKey(x => x.CourseId)
-            .OnDelete(DeleteBehavior.Cascade);
+            
+            builder.HasMany(c => c.StudyMaterials)
+                .WithOne(sm => sm.Course)
+                .HasForeignKey(sm => sm.CourseId);
 
-        builder.HasMany(x => x.Notifications)
-            .WithOne()
-            .HasForeignKey(x => x.CourseId)
-            .OnDelete(DeleteBehavior.Cascade);
+            
+            builder.HasMany(c => c.Notifications)
+                .WithOne(n => n.Course)
+                .HasForeignKey(n => n.CourseId);
+        }
     }
 }
