@@ -16,7 +16,7 @@ namespace Application.Courses.GetMyCourses
         public async Task<Result<IEnumerable<Course>>> HandleAsync(GetMyCoursesCommand command)
         {
             IEnumerable<Course> courses;
-            if (command.Role == Role.Proffesor)
+            if (command.Role == Role.Professor)
             {
                 courses = await _courseRepository.GetCoursesByProfessorIdAsync(command.UserId);
             }

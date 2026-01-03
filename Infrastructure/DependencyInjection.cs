@@ -1,4 +1,6 @@
-﻿using Domain.Persistance;
+﻿using Application.Courses.AddMaterial;
+using Domain.Persistance;
+using Infrastructure.Persistance.Repositories;
 using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -13,11 +15,12 @@ public static class DependencyInjection
     {
         services.AddDbContext<AppDbContext>(options =>
             options.UseNpgsql(
-                configuration.GetConnectionString("Default")));
+                configuration.GetConnectionString("DefaultConnection")));
 
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<ICourseRepository, CourseRepository>();
         services.AddScoped<IMessageRepository, MessageRepository>();
+        services.AddScoped<IStudyMaterialRepository, StudyMaterialRepository>();
 
         return services;
     }

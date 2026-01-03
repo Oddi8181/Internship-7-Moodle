@@ -12,6 +12,12 @@ public class CourseRepository : ICourseRepository
         _context = context;
     }
 
+    public async Task AddAsync(Course course)
+    {
+        _context.Courses.Add(course);
+        await _context.SaveChangesAsync();
+    }
+
     public async Task<IEnumerable<Course>> GetAllCoursesAsync()
         => await _context.Courses
             .Include(x => x.StudyMaterials)

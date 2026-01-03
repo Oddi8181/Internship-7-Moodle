@@ -14,7 +14,7 @@ namespace Application.Authentication.Login
              _userRepository = userRepository;
              _validator = validator;
         }
-        public async Task<Result<User>> ResultAsync(LoginCommand loginCommand)
+        public async Task<Result<User>> HandleAsync(LoginCommand loginCommand)
         {
             var validation = _validator.Validate(loginCommand);
             if (validation.HasErrors)

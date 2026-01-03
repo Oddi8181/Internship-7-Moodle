@@ -1,6 +1,7 @@
 ﻿using Application.Common.Model;
 using Application.Common.Validation;
 using Domain.Entities;
+using Domain.Enums;
 using Domain.Persistance;
 
 namespace Application.Authentication.Register
@@ -16,7 +17,7 @@ namespace Application.Authentication.Register
         }
         public async Task<Result<User>> HandleAsync(RegisterCommand command)
         {
-            var validation = _validator.Validate(command);
+            var validation = RegisterValidator.Validate(command);
             if (validation.HasErrors)
             {
                 return Result<User>.Failure(validation);
@@ -26,8 +27,10 @@ namespace Application.Authentication.Register
                 return EmailAlreadyExists();
 
             var passwordHash = PasswordHasher.Hash(command.Password);
+          
 
-            var user = new User(command.Email, passwordHash);
+            var user = new User(command.Email, passwordHash, command.FirstName, command.LastName, Role.Student);
+
 
             await _userRepository.AddAsync(user);
             return Result<User>.Success(user);

@@ -3,13 +3,15 @@ using Microsoft.EntityFrameworkCore.Design;
 
 namespace Infrastructure.Persistence
 {
-    public class AppDbContextFactory : IDesignTimeDbContextFactory<AppDbContext>
+    public class AppDbContextFactory
+        : IDesignTimeDbContextFactory<AppDbContext>
     {
         public AppDbContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
 
-            optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=InternshipMoodleDb;Trusted_Connection=True;");
+            optionsBuilder.UseNpgsql(
+                "Host=localhost;Port=5432;Database=student_app;Username=postgres;Password=mypassword");
 
             return new AppDbContext(optionsBuilder.Options);
         }

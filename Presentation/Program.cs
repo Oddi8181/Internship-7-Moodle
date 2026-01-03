@@ -1,25 +1,27 @@
-var builder = WebApplication.CreateBuilder(args);
+﻿using Infrastructure;
+using Presentation.Menus;
+using Presentation.Seed;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Presentation;
+using Application;
 
-// Add services to the container.
+var host = Host.CreateDefaultBuilder(args)
+    .ConfigureServices((context, services) =>
+    {
+        services.AddInfrastructure(context.Configuration);
+        services.AddApplication();
+        services.AddPresentation();
+    })
+    .Build();
 
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 
-var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+using (var scope = host.Services.CreateScope())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    var seeder = scope.ServiceProvider.GetRequiredService<DatabaseSeeder>();
+    await seeder.SeedAsync();
 }
 
-app.UseHttpsRedirection();
 
-app.UseAuthorization();
-
-app.MapControllers();
-
-app.Run();
+var mainMenu = host.Services.GetRequiredService<MainMenu>();
+mainMenu.Show();

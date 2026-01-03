@@ -4,6 +4,7 @@ namespace Domain.Persistance
 {
     public interface ICourseRepository
     {
+        Task AddAsync(Course course);
         Task<IEnumerable<Course>> GetAllCoursesAsync();
         Task<Course?> GetByIdAsync(Guid courseId);
         Task<IEnumerable<Course>> GetCoursesByProfessorIdAsync(Guid userId);

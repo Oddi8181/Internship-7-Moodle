@@ -5,10 +5,19 @@ namespace Application.Authentication.Register
 {
     public class RegisterValidator
     {
-        public ValidationResult Validate(RegisterCommand command)
+        public static ValidationResult Validate(RegisterCommand command)
         {
             var result = new ValidationResult();
-            if (string.IsNullOrWhiteSpace(command.Name))
+            if (string.IsNullOrWhiteSpace(command.FirstName))
+            {
+                result.AddValidationItem(new ValidationItem
+                {
+                    ValidationSeverity = ValidationSeverity.Error,
+                    Message = "Name is required.",
+                    Code = "NAME_REQUIRED"
+                });
+            }
+            if (string.IsNullOrWhiteSpace(command.LastName))
             {
                 result.AddValidationItem(new ValidationItem
                 {
@@ -61,10 +70,10 @@ namespace Application.Authentication.Register
                     Message = "Invalid email format.",
                     Code = "INVALID_EMAIL_FORMAT"
                 });
-
             }
             return result;
         }
+
         private static bool IsValidEmail(string email)
         {
             var regex = new Regex(@"^.{1,}@.{2,}\..{3,}$");
